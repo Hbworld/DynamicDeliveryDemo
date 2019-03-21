@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DynamicTest</string>
+    <string name="title_dynamic_feature">Module Title</string>
+
+    <string name="dynamic_hoho_progress">Download in progress... %s</string>
+    <string name="dynamic_hoho_progress_complete">Download Complete</string>
+    <string name="dynamic_hoho_progress_failed">Download Failed</string>
+</resources>
