@@ -22,11 +22,10 @@ import com.google.android.play.core.tasks.OnFailureListener;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
 
-//import android.util.Log;
 
 public class CommonDynamicLoaderActivity extends AppCompatActivity implements SplitInstallStateUpdatedListener, OnCompleteListener, OnFailureListener, OnSuccessListener {
 
-    private static String TAG = "CommonDynamicLoaderActivity";
+    private static String TAG = "InstallDynamicModule";
     public static String EXTRA_INIT_ACTIVITY = "EXTRA_INIT_ACTIVITY";
     public static String EXTRA_INIT_MODULE = "EXTRA_INIT_MODULE";
 
@@ -51,17 +50,22 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
         resultIntent = getIntent();
         initActivity = resultIntent.getStringExtra(EXTRA_INIT_ACTIVITY);
         initModule = resultIntent.getStringExtra(EXTRA_INIT_MODULE);
+        Log.i(TAG,"inside CommonDynamicLoaderActivity");
+
 
         installModule();
 
     }
 
     private void installModule() {
+
         SplitInstallRequest request = SplitInstallRequest.newBuilder()
                 .addModule(initModule)
                 .build();
         mInstallManager.registerListener(this);
         mInstallManager.startInstall(request).addOnFailureListener(this).addOnSuccessListener(this).addOnCompleteListener(this);
+        Log.i(TAG,"starting install manager");
+
     }
 
     @Override
@@ -71,8 +75,10 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
             switch (splitInstallSessionState.status()) {
                 case SplitInstallSessionStatus.DOWNLOADING:
                     displayLoadingState(splitInstallSessionState, "Downloading ");
+                    Log.i(TAG,"state DOWNLOADING");
                     break;
                 case SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION:
+                    Log.i(TAG,"state REQUIRES_USER_CONFIRMATION");
                     try {
                         mContext.startIntentSender(splitInstallSessionState.resolutionIntent().getIntentSender(), null, 0, 0, 0);
                     } catch (IntentSender.SendIntentException e) {
@@ -80,6 +86,7 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
                     }
                     break;
                 case SplitInstallSessionStatus.INSTALLED:
+                    Log.i(TAG,"state INSTALLED");
                     if (26 <= Build.VERSION.SDK_INT) {
                         SplitInstallHelper.updateAppInfo(mContext.getApplicationContext());
                     }
@@ -87,9 +94,11 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
                     hideProgress();
                     break;
                 case SplitInstallSessionStatus.INSTALLING:
+                    Log.i(TAG,"state INSTALLING");
                     displayLoadingState(splitInstallSessionState, "Downloading ");
                     break;
                 case SplitInstallSessionStatus.FAILED:
+                    Log.i(TAG,"state FAILED");
                     Log.e(TAG, "Error " + splitInstallSessionState.errorCode() + " for module ");
                     break;
             }
@@ -98,39 +107,45 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
     }
 
     private void startModuleActivity() {
+        Log.i(TAG,"starting initActivity");
         resultIntent.setClassName(this, initActivity);
         startActivity(resultIntent);
         finish();
     }
 
     private void hideProgress() {
+        Log.i(TAG,"stopWalletLoader");
         AnimationFactory.stopWalletLoader(mainLoaderView);
 
     }
 
     private void displayLoadingState(SplitInstallSessionState state, String message) {
+        Log.i(TAG,"startWalletLoader");
         AnimationFactory.startWalletLoader(mainLoaderView);
-        long progress = (state.bytesDownloaded() / state.totalBytesToDownload()) * 100;
-
-//        txtProgress.setText(getString(R.string.dynamic_hoho_progress, (int) progress));
-
-        Log.d(TAG, "Total: " + state.totalBytesToDownload());
-        Log.d(TAG, state.bytesDownloaded() + "");
+//        long progress = (state.bytesDownloaded() / state.totalBytesToDownload()) * 100;
+//
+////        txtProgress.setText(getString(R.string.dynamic_hoho_progress, (int) progress));
+//
+//        Log.d(TAG, "Total: " + state.totalBytesToDownload());
+//        Log.d(TAG, state.bytesDownloaded() + "");
     }
 
     @Override
     public void onComplete(Task task) {
+        Log.i(TAG,"onComplete");
         txtProgress.setText(getString(R.string.dynamic_hoho_progress_complete));
     }
 
     @Override
     public void onFailure(Exception e) {
+        Log.i(TAG,"onFailure \n" +e);
         txtProgress.setText(getString(R.string.dynamic_hoho_progress_failed));
 
     }
 
     @Override
     public void onSuccess(Object o) {
+        Log.i(TAG,"onSuccess");
         txtProgress.setText(getString(R.string.dynamic_hoho_progress_complete));
     }
 }
