@@ -4,7 +4,6 @@
     package="com.test.dynamic_feature">
 
     <dist:module
-        dist:instant="false"
         dist:onDemand="true"
         dist:title="@string/title_dynamic_feature">
         <dist:fusing dist:include="true" />
