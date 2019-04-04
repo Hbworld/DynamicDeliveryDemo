@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -51,6 +52,13 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
         initActivity = resultIntent.getStringExtra(EXTRA_INIT_ACTIVITY);
         initModule = resultIntent.getStringExtra(EXTRA_INIT_MODULE);
         Log.i(TAG,"inside CommonDynamicLoaderActivity");
+
+        findViewById(R.id.randomClick).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startModuleActivity();
+            }
+        });
 
 
         installModule();

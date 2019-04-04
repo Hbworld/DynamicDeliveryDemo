@@ -7,6 +7,16 @@
     tools:context=".CommonDynamicLoaderActivity">
 
 
+
+
+    <Button
+        android:text="Create Crash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/randomClick"/>
+
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/mainLoaderView"
         android:layout_width="wrap_content"
