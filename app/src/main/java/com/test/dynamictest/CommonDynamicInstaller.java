@@ -28,7 +28,7 @@ class CommonDynamicInstaller {
             Log.i(TAG,installedModules.toString());
 
         }
-        Log.i(TAG,"inside checkForInstallation");
+        Log.i(TAG,"inside checkForInstallation size"+installedModules.size());
         return installedModules.contains(moduleName);
     }
 }

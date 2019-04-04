@@ -64,7 +64,7 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
                 .build();
         mInstallManager.registerListener(this);
         mInstallManager.startInstall(request).addOnFailureListener(this).addOnSuccessListener(this).addOnCompleteListener(this);
-        Log.i(TAG,"starting install manager");
+        Log.i(TAG,"starting install manager : size "+ mInstallManager.getInstalledModules().size());
 
     }
 
@@ -102,6 +102,9 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
                     Log.e(TAG, "Error " + splitInstallSessionState.errorCode() + " for module ");
                     break;
             }
+        }else {
+            Log.i(TAG,"else case");
+
         }
 
     }
