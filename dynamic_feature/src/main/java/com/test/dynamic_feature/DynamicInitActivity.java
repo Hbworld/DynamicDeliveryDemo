@@ -27,6 +27,6 @@ public class DynamicInitActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
-        SplitCompat.install(this.getApplicationContext());
+        SplitCompat.install(this);
     }
 }
