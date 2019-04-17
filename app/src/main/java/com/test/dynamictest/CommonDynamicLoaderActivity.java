@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -37,6 +41,7 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
     private SplitInstallManager mInstallManager;
     private String initActivity;
     private String initModule;
+    private FrameLayout frame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,7 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
         setContentView(R.layout.activity_dynamic_loader);
 
         mainLoaderView = findViewById(R.id.mainLoaderView);
+        frame = findViewById(R.id.frame);
         txtProgress = findViewById(R.id.progress);
         mContext = CommonDynamicLoaderActivity.this;
         mInstallManager = SplitInstallManagerFactory.create(this);
@@ -111,9 +117,31 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
 
     private void startModuleActivity() {
         Log.i(TAG,"starting initActivity");
-        resultIntent.setClassName(this, initActivity);
-        startActivity(resultIntent);
-        finish();
+//        resultIntent.setClassName(this, initActivity);
+//        startActivity(resultIntent);
+//        finish();
+
+        frame.setVisibility(View.VISIBLE);
+
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment;
+        try {
+            fragment = (Fragment) Class.forName("com.test.dynamic_feature.DynamicInitFragment").newInstance();
+            fragmentTransaction.replace(R.id.frame, fragment);
+            fragmentTransaction.commitAllowingStateLoss();
+        } catch (IllegalAccessException e) {
+            Log.e(TAG, e.toString());
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            Log.e(TAG, e.toString());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            Log.e(TAG, e.toString());
+            e.printStackTrace();
+        }
+
+
     }
 
     private void hideProgress() {

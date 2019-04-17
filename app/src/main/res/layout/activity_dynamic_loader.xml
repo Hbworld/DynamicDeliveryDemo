@@ -26,4 +26,12 @@
         android:layout_below="@+id/mainLoaderView"
         android:text="Download in progress.."/>
 
+
+    <FrameLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frame"/>
+
+
 </RelativeLayout>
