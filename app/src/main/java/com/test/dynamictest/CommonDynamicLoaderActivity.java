@@ -1,5 +1,6 @@
 package com.test.dynamictest;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -21,6 +22,9 @@ import com.google.android.play.core.tasks.OnCompleteListener;
 import com.google.android.play.core.tasks.OnFailureListener;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 
 public class CommonDynamicLoaderActivity extends AppCompatActivity implements SplitInstallStateUpdatedListener, OnCompleteListener, OnFailureListener, OnSuccessListener {
@@ -111,9 +115,28 @@ public class CommonDynamicLoaderActivity extends AppCompatActivity implements Sp
 
     private void startModuleActivity() {
         Log.i(TAG,"starting initActivity");
-        resultIntent.setClassName(this, initActivity);
-        startActivity(resultIntent);
-        finish();
+//        resultIntent.setClassName(this, initActivity);
+//        startActivity(resultIntent);
+//        finish();
+        try {
+            String className = "com.test.dynamic_feature.DynamicTestClass";
+            Class<?>  hoho = Class.forName(className); // convert string classname to class
+            String methodName = "init";
+            Method m = hoho.getDeclaredMethod(methodName, Application.class);
+            Object o = m.invoke(null, ((Application)mContext.getApplicationContext()));
+        } catch (ClassNotFoundException e) {
+            Log.e(TAG,e.toString());
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            Log.e(TAG,e.toString());
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            Log.e(TAG,e.toString());
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            Log.e(TAG,e.toString());
+            e.printStackTrace();
+        }
     }
 
     private void hideProgress() {
