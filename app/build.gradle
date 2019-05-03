@@ -1,23 +1,58 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    signingConfigs {
+        debug {
+            keyAlias 'Hbworld'
+            keyPassword 'hbworld'
+            storeFile file('keystore')
+            storePassword 'hbworld'
+        }
+
+        release {
+            keyAlias 'Hbworld'
+            keyPassword 'hbworld'
+            storeFile file('keystore')
+            storePassword 'hbworld'
+        }
+    }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.test.dynamictest"
         multiDexEnabled true
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 21
-        versionName "1.21"
+        versionCode 58
+        versionName "1.58"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def name = "Demo.apk"
+                    output.outputFileName = name
+                }
+            }
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def name = "Demo.apk"
+                    output.outputFileName = name
+                }
+            }
         }
     }
-
 
     dynamicFeatures = [":dynamic_feature"]
 
