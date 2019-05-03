@@ -13,9 +13,10 @@
         android:layout_height="wrap_content"
         android:text="Its a Library Activity"/>
 
+
     <Button
         android:id="@+id/btn_next"
-        android:text="Move to next screen"
+        android:text="Move to next screenØß"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

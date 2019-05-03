@@ -4,6 +4,9 @@
 
     <application>
         <activity android:name=".LibraryActivity"></activity>
+        <activity android:name=".FirstActivity"></activity>
+        <activity android:name=".SecondActivity"></activity>
+
     </application>
 
 </manifest>
