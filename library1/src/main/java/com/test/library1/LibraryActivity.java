@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-public class LibraryActivity extends AppCompatActivity {
+public class LibraryActivity extends BaseActivity {
 
     public static final String TAG = "InstallDynamicModule";
 

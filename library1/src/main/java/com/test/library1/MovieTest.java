@@ -3,7 +3,7 @@ package com.test.library1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MovieTest extends AppCompatActivity {
+public class MovieTest extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

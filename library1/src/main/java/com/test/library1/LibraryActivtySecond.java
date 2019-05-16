@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-public class LibraryActivtySecond extends AppCompatActivity {
+public class LibraryActivtySecond extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
