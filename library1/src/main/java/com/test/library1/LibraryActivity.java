@@ -56,6 +56,8 @@ public class LibraryActivity extends BaseActivity {
     }
 
     private void openPicassoCrashActivity() {
+        Intent i = new Intent(LibraryActivity.this,PicassoCrashActivity.class);
+        startActivity(i);
     }
 
     private void openMovieActivity() {
