@@ -3,7 +3,9 @@
     package="com.test.library1">
 
     <application>
-        <activity android:name=".LibraryActivity"></activity>
+        <activity android:name=".MovieTest"></activity>
+        <activity android:name=".LibraryActivtySecond" />
+        <activity android:name=".LibraryActivity" />
     </application>
 
 </manifest>
