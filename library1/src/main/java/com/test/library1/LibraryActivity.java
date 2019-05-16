@@ -38,6 +38,13 @@ public class LibraryActivity extends BaseActivity {
             }
         });
 
+        findViewById(R.id.btn3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPicassoCrashActivity();
+            }
+        });
+
         ImageView iv = findViewById(R.id.iv_wifi_vendor);
 
         Picasso.with(this)
@@ -46,6 +53,9 @@ public class LibraryActivity extends BaseActivity {
                 .error(R.drawable.ic_wifi_timing)
                 .into(iv);
 
+    }
+
+    private void openPicassoCrashActivity() {
     }
 
     private void openMovieActivity() {
@@ -57,7 +67,7 @@ public class LibraryActivity extends BaseActivity {
 
             Intent i = new Intent(LibraryActivity.this,LibraryActivtySecond.class);
             startActivity(i);
-//            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_out_left);
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_out_left);
 
 
     }

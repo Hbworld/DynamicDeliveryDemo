@@ -31,7 +31,7 @@
         android:layout_below="@+id/iv_wifi_vendor"
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
-        android:text="Next Screen" />
+        android:text="Override Pending Transition Issue" />
 
     <Button
         android:id="@+id/btn2"
@@ -40,6 +40,15 @@
         android:layout_below="@+id/btn1"
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
-        android:text="Movie Test" />
+        android:text="Webview Issue" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn2"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:text="Picasso Issue" />
 
 </RelativeLayout>

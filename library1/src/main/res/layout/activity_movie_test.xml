@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MovieTest">
-
-
 
     <WebView
         android:id="@+id/entertainment_webview"
@@ -15,15 +12,12 @@
 
 
     <ProgressBar
-        android:id="@+id/entertainment_progress_bar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/progress_bar"
+        android:indeterminateDrawable="@drawable/progress_large_holo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@color/movie_transparent"
-        android:clickable="true"
-        android:indeterminateDrawable="@drawable/movie_progress_large_holo"
         android:visibility="gone" />
-
 
 
 </RelativeLayout>
